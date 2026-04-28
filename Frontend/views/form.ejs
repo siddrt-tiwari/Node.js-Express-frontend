@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Form</title>
+</head>
+<body>
+    <h2>Submit Data</h2>
+
+    <% if (typeof error !== 'undefined') { %>
+        <div style="color:red;"><%= error %></div>
+    <% } %>
+
+    <form action="/submit" method="POST">
+        <label>Name:</label><br>
+        <input type="text" name="name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+    <a href="/todo">Go to Todo</a>
+</body>
+</html>
