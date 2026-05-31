@@ -1,16 +1,25 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./Frontend
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    restart: unless-stopped
     ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+      - "27017:27017"
 
   backend:
     build: ./Backend
     ports:
       - "5001:5000"
     environment:
-      - MONGO_URI=mongodb://host.docker.internal:27017
+      - MONGO_URI=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
