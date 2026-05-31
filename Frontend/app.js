@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Flask backend URL (important for Docker)
-const BACKEND_URL = "http://13.201.99.67:5000";
+const BACKEND_URL = "http://13.201.184.74:5000";
 
 // Form page
 app.get('/', (req, res) => {
