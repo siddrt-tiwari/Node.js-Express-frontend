@@ -28,7 +28,11 @@ def submit():
         return jsonify({"error": "Email exists"}), 400
 
     collection.insert_one({"name": name, "email": email})
-    return jsonify({"message": "Success"}), 200
+    return jsonify({
+        "name": name,
+        "email": email,
+        "message": "Data received successfully"
+    })
 
 
 @app.route('/submittodoitem', methods=['POST'])
