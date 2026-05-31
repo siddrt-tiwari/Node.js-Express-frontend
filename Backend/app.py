@@ -7,7 +7,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-mongo_uri = os.getenv("MONGO_URI")
+mongo_uri = os.getenv("MONGO_URI", "mongodb://host.docker.internal:27017")
 client = MongoClient(mongo_uri)
 
 db = client["test_db"]
