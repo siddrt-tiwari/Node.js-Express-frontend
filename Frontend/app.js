@@ -17,14 +17,22 @@ app.get('/', (req, res) => {
 
 // Submit form → send to Flask
 app.post('/submit', async (req, res) => {
+    console.log("REQ BODY:", req.body);
+
     try {
-        await axios.post(`${BACKEND_URL}/submit`, req.body);
+        const response = await axios.post(
+            `${BACKEND_URL}/submit`,
+            req.body
+        );
+
+        console.log("BACKEND RESPONSE:", response.data);
+
         res.redirect('/success');
     } catch (error) {
+        console.log(error);
         res.render('form', { error: "Error submitting form" });
     }
 });
-
 // Todo page
 app.get('/todo', (req, res) => {
     res.render('todo');

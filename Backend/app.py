@@ -17,6 +17,7 @@ todo_collection = db["todo_items"]
 @app.route('/submit', methods=['POST'])
 def submit():
     data = request.form or request.json
+    print("RECEIVED:", data)
 
     name = data.get('name')
     email = data.get('email')
@@ -29,9 +30,8 @@ def submit():
 
     collection.insert_one({"name": name, "email": email})
     return jsonify({
-        "name": name,
-        "email": email,
-        "message": "Data received successfully"
+        "name": data.get('name'),
+        "email": data.get('email')
     })
 
 
