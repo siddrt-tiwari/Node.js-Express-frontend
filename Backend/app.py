@@ -14,6 +14,10 @@ db = client["test_db"]
 collection = db["users"]
 todo_collection = db["todo_items"]
 
+@app.route("/")
+def home():
+    return jsonify({"message": "Flask Backend Running"})
+
 @app.route('/submit', methods=['POST'])
 def submit():
     data = request.form or request.json
