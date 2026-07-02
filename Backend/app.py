@@ -18,10 +18,7 @@ todo_collection = db["todo_items"]
 def home():
     return jsonify({"message": "Flask Backend Running"})
 
-@app.route('/submit', methods=['POST'])
-def submit():
     data = request.form or request.json
-    print("RECEIVED:", data)
 
     name = data.get('name')
     email = data.get('email')
@@ -29,34 +26,21 @@ def submit():
     if not name or not email:
         return jsonify({"error": "Missing fields"}), 400
 
-    if collection.find_one({"email": email}):
-        return jsonify({"error": "Email exists"}), 400
-
-    collection.insert_one({"name": name, "email": email})
     return jsonify({
-        "name": data.get('name'),
-        "email": data.get('email')
-    })
+        "message": "Data received successfully",
+        "name": name,
+        "email": email
+    }), 200
 
 
 @app.route('/submittodoitem', methods=['POST'])
 def submit_todo():
     data = request.form or request.json
 
-    item_name = data.get('itemName')
-    item_description = data.get('itemDescription')
-    item_id = data.get('itemId')
-
-    if not item_name or not item_description or not item_id:
-        return jsonify({"error": "Missing fields"}), 400
-
-    todo_collection.insert_one({
-        "itemId": item_id,
-        "itemName": item_name,
-        "itemDescription": item_description
-    })
-
-    return jsonify({"message": "Success"}), 200
+    return jsonify({
+        "message": "Todo received successfully",
+        "data": data
+    }), 200
 
 
 if __name__ == '__main__':
