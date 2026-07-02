@@ -1,18 +1,10 @@
 from flask import Flask, request, jsonify, redirect, url_for
-from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = Flask(__name__)
-
-mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
-client = MongoClient(mongo_uri)
-
-db = client["test_db"]
-collection = db["users"]
-todo_collection = db["todo_items"]
 
 @app.route("/")
 def home():
