@@ -6,6 +6,17 @@ load_dotenv()
 
 app = Flask(__name__)
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.form or request.json
+
+    print("RECEIVED:", data)
+
+    return jsonify({
+        "message": "Success",
+        "data": data
+    }), 200
+
 @app.route("/")
 def home():
     return jsonify({"message": "Flask Backend Running"})
